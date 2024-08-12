@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>View Bookings</h1>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.guest_name.label }}<br>
+        {{ form.guest_name(size=32) }}<br>
+        {% for error in form.guest_name.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.check_in.label }}<br>
+        {{ form.check_in() }}<br>
+        {% for error in form.check_in.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.check_out.label }}<br>
+        {{ form.check_out() }}<br>
+        {% for error in form.check_out.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.room_id.label }}<br>
+        {{ form.room_id(size=10) }}<br>
+        {% for error in form.room_id.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.submit() }}
+    </p>
+</form>
+<h2>Existing Bookings</h2>
+<ul>
+    {% for booking in bookings %}
+        <li>{{ booking.guest_name }} - Room ID: {{ booking.room_id }} (Check-in: {{ booking.check_in }} Check-out: {{ booking.check_out }})</li>
+    {% endfor %}
+</ul>
+{% endblock %}

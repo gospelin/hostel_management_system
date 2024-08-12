@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Manage Rooms</h1>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.room_number.label }}<br>
+        {{ form.room_number(size=32) }}<br>
+        {% for error in form.room_number.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.capacity.label }}<br>
+        {{ form.capacity(size=10) }}<br>
+        {% for error in form.capacity.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.submit() }}
+    </p>
+</form>
+<h2>Existing Rooms</h2>
+<ul>
+    {% for room in rooms %}
+        <li>{{ room.room_number }} - Capacity: {{ room.capacity }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
